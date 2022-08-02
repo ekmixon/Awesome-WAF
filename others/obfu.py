@@ -9,7 +9,7 @@ def paramEncode(params="", charset="", encodeEqualSign=False, encodeAmpersand=Fa
     result = ""
     equalSign = "="
     ampersand = "&"
-    if '=' and '&' in params:
+    if '&' in params:
         if encodeEqualSign:
             equalSign = equalSign.encode(charset)
         if encodeAmpersand:
@@ -53,10 +53,10 @@ def main():
     optional.add_argument('-ueo', help='URL Encode Output', dest='ueo', action='store_true')
     optional.add_argument('-udi', help='URL Decode Input', dest='udi', action='store_true')
     args = parser.parse_args()
-    if not len(sys.argv) > 1:
+    if len(sys.argv) <= 1:
         parser.print_help()
         quit()
-    print('Input: %s' % (args.str))
+    print(f'Input: {args.str}')
     print('Output: %s' % (paramEncode(params=args.str, charset=args.enc, urlDecodeInput=args.udi, urlEncodeOutput=args.ueo)))
 
 if __name__ == '__main__':
